@@ -1,0 +1,92 @@
+﻿@model MvcDentista1.Models.OSBuscaViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista de Pacientes</h1>
+
+<p>
+    <a class="btn btn-success" asp-action="Create">Crear nuevo registro</a>
+    <a class="btn btn-warning" asp-controller="Dientes" asp-action="Index">Placas Dentales</a>
+</p>
+
+
+    
+
+
+<form asp-controller="Pacientes" asp-action="Index" method="get">
+    <p>
+        <select asp-for="OSPaciente" asp-items="Model.ObraSocial">
+            <option value="">Todos</option>
+        </select>
+        Nombre: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filtro" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pacientes[0].Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pacientes[0].Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pacientes[0].FechaAsistencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pacientes[0].Domicilio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pacientes[0].Localidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pacientes[0].Edad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pacientes[0].ObraSocial)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Pacientes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaAsistencia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Domicilio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Localidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Edad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ObraSocial)
+                </td>
+                <td>
+                    <a class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Borrar</a>
+
+                    <a class="btn btn-outline-success btn-sm" asp-controller="Dientes" asp-action="Create" asp-route-id="@item.Id">Crear Placa</a>
+                    <a class="btn btn-outline-primary btn-sm" asp-controller="Dientes" asp-action="Details" asp-route-id="@item.Id">Ver Placa</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
